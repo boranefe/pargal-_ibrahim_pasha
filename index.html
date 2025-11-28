@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Hotlink korumasını aşmak için -->
     <meta name="referrer" content="no-referrer">
     <title>Pargalı İbrahim Pasha - The Grand Vizier</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -32,11 +34,21 @@
         }
 
         /* Typography */
-        .font-cinzel { font-family: 'Cinzel', serif; }
-        .font-playfair { font-family: 'Playfair Display', serif; }
-        .text-gold { color: var(--color-gold); }
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .text-gold {
+            color: var(--color-gold);
+        }
+
         .text-gradient-gold {
             background: linear-gradient(to bottom, #f3dba6, #eebb5d, #b8860b);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -49,7 +61,10 @@
             scroll-behavior: smooth;
             scrollbar-width: none;
         }
-        .slides-container::-webkit-scrollbar { display: none; }
+
+        .slides-container::-webkit-scrollbar {
+            display: none;
+        }
 
         section {
             height: 100vh;
@@ -60,10 +75,10 @@
             flex-direction: column;
             justify-content: center;
             overflow: hidden;
-            background-color: #0b1121; /* Resim gelmezse arka plan rengi */
+            background-color: #0b1121;
         }
 
-        /* Background Image Fix - Animasyon Kaldırıldı */
+        /* Background Image Fix */
         .bg-img-layer {
             position: absolute;
             top: 0;
@@ -72,7 +87,7 @@
             height: 100%;
             object-fit: cover;
             z-index: 0;
-            opacity: 1; /* Varsayılan olarak GÖRÜNÜR */
+            opacity: 1;
         }
 
         /* Overlays */
@@ -82,7 +97,7 @@
             background: linear-gradient(to right, #0b1121 40%, rgba(11, 17, 33, 0.6) 100%);
             z-index: 1;
         }
-        
+
         .overlay-full {
             position: absolute;
             inset: 0;
@@ -100,21 +115,21 @@
             background: linear-gradient(135deg, #4a0404 0%, #1a0505 100%);
             border: 1px solid rgba(238, 187, 93, 0.3);
             border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         }
 
         .map-popup {
             background: rgba(30, 41, 59, 0.95);
             border: 1px solid #475569;
             border-radius: 6px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
             max-width: 400px;
         }
 
         .gold-border-img {
             border: 1px solid var(--color-gold);
             padding: 5px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
         }
 
         /* Navbar */
@@ -130,6 +145,7 @@
             z-index: 50;
             background: linear-gradient(to bottom, rgba(11, 17, 33, 1), transparent);
         }
+
         .nav-link {
             color: #9ca3af;
             font-size: 0.75rem;
@@ -140,12 +156,23 @@
             cursor: pointer;
             transition: color 0.3s;
         }
-        .nav-link:hover { color: var(--color-gold); }
+
+        .nav-link:hover {
+            color: var(--color-gold);
+        }
 
         /* Content Animations */
-        .fade-in-up { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
-        .visible { opacity: 1; transform: translateY(0); }
-        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Navigation Dots */
         .nav-dots {
             position: fixed;
@@ -157,23 +184,29 @@
             gap: 1rem;
             z-index: 40;
         }
+
         .dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             cursor: pointer;
             transition: all 0.3s;
         }
-        .dot.active { background: var(--color-gold); transform: scale(1.5); }
+
+        .dot.active {
+            background: var(--color-gold);
+            transform: scale(1.5);
+        }
     </style>
 </head>
+
 <body>
 
     <!-- Navbar -->
     <nav class="navbar">
         <div class="flex items-center gap-3">
-            <span class="text-gold text-2xl">❖</span> 
+            <span class="text-gold text-2xl">❖</span>
             <span class="font-cinzel text-gold text-xl tracking-widest font-bold">OTTOMAN ARCHIVES</span>
         </div>
         <div class="hidden md:flex">
@@ -203,102 +236,104 @@
 
         <!-- SLAYT 1: KAPAK -->
         <section>
-            <!-- Arkaplan -->
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Piri_reis_world_map_01.jpg" 
-                 class="bg-img-layer" 
-                 referrerpolicy="no-referrer"
-                 alt="Piri Reis Map">
-            
+            <img src="images/campaign_map.jpg" class="bg-img-layer" style="opacity: 0.3;" alt="Ottoman Campaigns Map">
+
             <div class="overlay-full"></div>
-            
+
             <div class="content-layer text-center px-6 max-w-5xl mx-auto fade-in-up">
-                <!-- Tuğra (Base64) -->
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" 
-                     style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Tughra_of_Suleiman_the_Magnificent.svg/800px-Tughra_of_Suleiman_the_Magnificent.svg.png'); background-size: contain; background-repeat: no-repeat; width: 150px; height: 100px; filter: invert(1) drop-shadow(0 0 5px gold);"
-                     class="mx-auto mb-8 opacity-80 block"
-                     referrerpolicy="no-referrer"
-                     alt="Tughra">
+                <svg class="mx-auto mb-8 opacity-80"
+                    style="width: 150px; height: 100px; filter: drop-shadow(0 0 10px gold);" viewBox="0 0 200 100"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 80 Q40 20, 80 40 T140 60 Q160 70, 180 50" stroke="gold" stroke-width="2" fill="none" />
+                    <circle cx="50" cy="50" r="20" stroke="gold" stroke-width="1.5" fill="none" />
+                    <circle cx="120" cy="55" r="15" stroke="gold" stroke-width="1.5" fill="none" />
+                    <path d="M80 40 L85 80 L75 80 Z" fill="gold" />
+                    <path d="M140 60 L145 85 L135 85 Z" fill="gold" />
+                    <line x1="30" y1="70" x2="25" y2="85" stroke="gold" stroke-width="1.5" />
+                    <line x1="45" y1="75" x2="40" y2="88" stroke="gold" stroke-width="1.5" />
+                </svg>
 
                 <p class="text-xs md:text-sm tracking-[0.4em] text-gray-400 uppercase mb-4">The Grand Vizier</p>
-                
-                <h1 class="text-6xl md:text-9xl font-cinzel font-bold text-gradient-gold leading-none mb-2">PARGALI</h1>
-                <h1 class="text-6xl md:text-9xl font-cinzel font-bold text-gradient-gold leading-none mb-12">IBRAHIM</h1>
 
-                <div class="bg-black/40 border-l-4 border-gold p-6 max-w-3xl mx-auto text-left backdrop-blur-sm shadow-2xl">
+                <h1 class="text-6xl md:text-9xl font-cinzel font-bold text-gradient-gold leading-none mb-2">PARGALI</h1>
+                <h1 class="text-6xl md:text-9xl font-cinzel font-bold text-gradient-gold leading-none mb-12">IBRAHIM
+                </h1>
+
+                <div
+                    class="bg-black/40 border-l-4 border-gold p-6 max-w-3xl mx-auto text-left backdrop-blur-sm shadow-2xl">
                     <p class="font-playfair italic text-xl md:text-2xl text-gray-200 leading-relaxed">
-                        "The eagle who flew too close to the sun. From the slave markets of Manisa to the right hand of the Sultan, his life was a golden tragedy."
+                        "The eagle who flew too close to the sun. From the slave markets of Manisa to the right hand of
+                        the Sultan, his life was a golden tragedy."
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- SLAYT 2: KÖKENLER (GÖRSEL DEĞİŞTİRİLDİ) -->
+        <!-- SLAYT 2: KÖKENLER -->
         <section>
-            <!-- Yeni Görsel: Tarihi Osmanlı Kadırgası -->
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Turkish_galley.jpg/1280px-Turkish_galley.jpg" 
-                 class="bg-img-layer" 
-                 referrerpolicy="no-referrer"
-                 style="object-position: bottom center;" 
-                 alt="Ottoman Galley">
-            
+            <img src="images/portrait.png" class="bg-img-layer" style="object-position: bottom center; opacity: 0.2;"
+                alt="Background">
+
             <div class="overlay-dark"></div>
-            
-            <div class="content-layer container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center h-full">
+
+            <div
+                class="content-layer container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center h-full">
                 <div class="fade-in-up flex flex-col items-start">
                     <div class="border-t border-gold w-16 mb-6"></div>
                     <h2 class="font-cinzel text-4xl text-gold mb-2">MAKBUL TO <br> MAKTUL</h2>
                     <h3 class="font-playfair text-4xl md:text-5xl text-white mb-6">Origins in Parga</h3>
-                    
+
                     <div class="flex gap-6 items-center">
                         <div class="gold-border-img inline-block w-48 h-64 overflow-hidden relative bg-black">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Ibrahim_Pasha.jpg" 
-                                 class="w-full h-full object-cover grayscale opacity-90"
-                                 referrerpolicy="no-referrer"
-                                 alt="Ibrahim Pasha">
+                            <img src="images/ibrahim_portrait.jpg" class="w-full h-full object-cover opacity-90"
+                                alt="Ibrahim Pasha">
                         </div>
                         <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
-                            Born <strong>Theophilus</strong> (1493). Son of a sailor. Kidnapped by pirates, sold into slavery in Manisa, where he met Prince Suleiman.
+                            Born <strong>Theophilus</strong> (1493). Son of a sailor. Kidnapped by pirates, sold into
+                            slavery in Manisa, where he met Prince Suleiman.
                         </p>
                     </div>
                 </div>
 
-                <div class="relative pl-8 md:pl-16 border-l border-gray-800 fade-in-up delay-200 flex flex-col justify-center">
+                <div
+                    class="relative pl-8 md:pl-16 border-l border-gray-800 fade-in-up delay-200 flex flex-col justify-center">
                     <div class="mb-12 relative group">
-                        <span class="absolute -left-[4.5rem] top-1 h-3 w-3 rounded-full border border-gold bg-transparent"></span>
+                        <span
+                            class="absolute -left-[4.5rem] top-1 h-3 w-3 rounded-full border border-gold bg-transparent"></span>
                         <span class="text-[#a82e2e] font-cinzel font-bold text-lg block mb-1">1493</span>
                         <h4 class="text-white text-xl font-bold">Birth & Enslavement</h4>
                         <p class="text-gray-500 text-xs mt-1">Abducted by corsairs, brought to the Ottoman Empire.</p>
                     </div>
                     <div class="mb-12 relative group">
-                        <span class="absolute -left-[4.5rem] top-1 h-3 w-3 rounded-full border border-gold bg-transparent"></span>
+                        <span
+                            class="absolute -left-[4.5rem] top-1 h-3 w-3 rounded-full border border-gold bg-transparent"></span>
                         <span class="text-[#a82e2e] font-cinzel font-bold text-lg block mb-1">1520</span>
                         <h4 class="text-white text-xl font-bold">Hasodabaşı</h4>
                         <p class="text-gray-500 text-xs mt-1">Head of the Royal Chamber upon Suleiman's accession.</p>
                     </div>
                     <div class="relative group">
-                        <span class="absolute -left-[4.5rem] top-1 h-4 w-4 rounded-full bg-gold shadow-[0_0_15px_#eebb5d]"></span>
+                        <span
+                            class="absolute -left-[4.5rem] top-1 h-4 w-4 rounded-full bg-gold shadow-[0_0_15px_#eebb5d]"></span>
                         <span class="text-gold font-cinzel font-bold text-xl block mb-1">1523</span>
                         <h4 class="text-gold text-2xl font-bold">Grand Vizier</h4>
-                        <p class="text-gray-400 text-sm mt-1">Shocking appointment, bypassing all experienced statesmen.</p>
+                        <p class="text-gray-400 text-sm mt-1">Shocking appointment, bypassing all experienced statesmen.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLAYT 3: KARDEŞLİK (BROTHERHOOD) -->
+        <!-- SLAYT 3: KARDEŞLİK -->
         <section>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c6/Tiziano_-_Suleiman_the_Magnificent_-_Google_Art_Project.jpg" 
-                 class="bg-img-layer" 
-                 referrerpolicy="no-referrer"
-                 style="object-position: top center;"
-                 alt="Suleiman">
-            
+            <img src="images/portrait.png" class="bg-img-layer" style="object-position: top center; opacity: 0.15;"
+                alt="Background">
+
             <div class="absolute inset-0 bg-black/60 z-1"></div>
-            
+
             <div class="content-layer container mx-auto px-6 h-full flex items-center justify-center">
-                
-                <div class="bg-[#0b1121]/80 backdrop-blur-md p-10 md:p-14 border border-gold/30 rounded-xl shadow-[0_0_60px_rgba(0,0,0,0.8)] max-w-4xl w-full text-center fade-in-up relative overflow-hidden">
-                    
+                <div
+                    class="bg-[#0b1121]/80 backdrop-blur-md p-10 md:p-14 border border-gold/30 rounded-xl shadow-[0_0_60px_rgba(0,0,0,0.8)] max-w-4xl w-full text-center fade-in-up relative overflow-hidden">
+
                     <div class="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-gold opacity-50"></div>
                     <div class="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-gold opacity-50"></div>
                     <div class="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-gold opacity-50"></div>
@@ -306,19 +341,22 @@
 
                     <p class="text-xs tracking-[0.5em] text-gold uppercase mb-4">The Sultan & The Slave</p>
                     <h2 class="text-5xl md:text-7xl font-cinzel text-white mb-8">THE BROTHERHOOD</h2>
-                    
+
                     <div class="relative py-6 px-4 md:px-12">
-                        <span class="text-6xl text-gold/20 font-playfair absolute top-0 left-0">“</span>
+                        <span class="text-6xl text-gold/20 font-playfair absolute top-0 left-0">"</span>
                         <p class="text-2xl md:text-3xl text-gray-100 italic font-playfair leading-relaxed">
-                            They ate together, hunted together, and shared the same tent. There was no secret between the Sultan and his Vizier.
+                            They ate together, hunted together, and shared the same tent. There was no secret between
+                            the Sultan and his Vizier.
                         </p>
-                        <span class="text-6xl text-gold/20 font-playfair absolute bottom-0 right-0">”</span>
+                        <span class="text-6xl text-gold/20 font-playfair absolute bottom-0 right-0">"</span>
                     </div>
-                    
+
                     <div class="w-24 h-px bg-gold/50 mx-auto my-8"></div>
-                    
+
                     <p class="text-gray-300 text-lg leading-relaxed font-light px-4 md:px-8">
-                        This intimacy was Ibrahim's greatest strength and his ultimate weakness. It created an inseparable bond that ruled the world, but also bred the jealousy that would eventually destroy him.
+                        This intimacy was Ibrahim's greatest strength and his ultimate weakness. It created an
+                        inseparable bond that ruled the world, but also bred the jealousy that would eventually destroy
+                        him.
                     </p>
                 </div>
 
@@ -327,28 +365,27 @@
 
         <!-- SLAYT 4: DÜĞÜN -->
         <section>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Surname-i_H%C3%BCmayun_-_circumcision_feast_2.jpg" 
-                 class="bg-img-layer" 
-                 referrerpolicy="no-referrer"
-                 alt="Wedding">
-                 
+            <img src="images/hippodrome.png" class="bg-img-layer" style="opacity: 0.2;" alt="Hippodrome">
+
             <div class="overlay-full" style="background: rgba(11, 17, 33, 0.94);"></div>
 
             <div class="content-layer container mx-auto px-6 flex items-center justify-center">
                 <div class="red-card p-10 md:p-16 max-w-5xl w-full relative fade-in-up">
                     <div class="absolute top-6 right-6 opacity-20"><span class="text-6xl text-gold">♕</span></div>
-                    
+
                     <div class="flex items-center gap-4 mb-2">
                         <div class="h-1 w-12 bg-gold"></div>
                         <span class="text-gold text-sm tracking-[0.3em] uppercase">1524</span>
                     </div>
-                    
-                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white mb-8">THE WEDDING OF THE CENTURY</h2>
+
+                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white mb-8">THE WEDDING OF THE CENTURY
+                    </h2>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
                         <div>
                             <p class="text-gray-300 leading-relaxed mb-4 text-lg">
-                                Often mistakenly believed to be married to Hatice Sultan in popular culture, historical records indicate he married <strong>Muhsine Hatun</strong>.
+                                Often mistakenly believed to be married to Hatice Sultan in popular culture, historical
+                                records indicate he married <strong>Muhsine Hatun</strong>.
                             </p>
                             <p class="text-gray-400 text-sm mt-4">
                                 *The confusion arises from later historians glorifying his connection to the dynasty.
@@ -357,7 +394,9 @@
                         <div class="border-l border-[#8b1c1c] pl-8 flex flex-col justify-center">
                             <p class="text-2xl font-playfair italic text-gold mb-4">"15 Days of Celebration"</p>
                             <p class="text-gray-300 text-sm leading-relaxed">
-                                The wedding took place in the Hippodrome. Suleiman himself presided over the ceremony—an honor previously unheard of for a slave. It was a spectacle of wealth that rivaled the treasury.
+                                The wedding took place in the Hippodrome. Suleiman himself presided over the ceremony—an
+                                honor previously unheard of for a slave. It was a spectacle of wealth that rivaled the
+                                treasury.
                             </p>
                         </div>
                     </div>
@@ -367,17 +406,14 @@
 
         <!-- SLAYT 5: SARAY & HARİTA -->
         <section>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Topkapi_Palace_Harem_02.jpg" 
-                 class="bg-img-layer" 
-                 referrerpolicy="no-referrer"
-                 alt="Palace">
-                 
+            <img src="images/palace_exterior.png" class="bg-img-layer" style="opacity: 0.2;" alt="Palace">
+
             <div class="overlay-dark"></div>
-            
+
             <div class="content-layer container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="map-popup p-6 fade-in-up bg-[#1e293b] relative">
                     <div class="absolute -top-3 -left-3 bg-gold text-black font-bold px-3 py-1 text-xs">MAP VIEW</div>
-                    
+
                     <div class="flex justify-between items-start mb-4">
                         <div class="flex items-center gap-2">
                             <span class="text-gold text-xl">🏰</span>
@@ -385,26 +421,32 @@
                         </div>
                     </div>
                     <div class="bg-black/50 h-32 w-full mb-4 rounded border border-gray-600 overflow-hidden relative">
-                         <!-- Harita -->
-                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Map_of_Constantinople_%281422%29_by_Cristoforo_Buondelmonti.jpg" 
-                              class="w-full h-full object-cover opacity-60"
-                              referrerpolicy="no-referrer"
-                              alt="Old Map">
-                         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gold text-2xl">📍</div>
+                        <img src="images/palace_map.png" class="w-full h-full object-cover" alt="Palace Location">
+                        <div
+                            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gold text-2xl">
+                            📍</div>
                     </div>
                     <p class="text-gray-300 text-sm mb-2">
                         The only private residence of this scale from the 16th century, located right on the Hippodrome.
                     </p>
-                    <a href="#" class="text-blue-400 text-xs hover:underline block mt-2">Current: Museum of Turkish & Islamic Arts</a>
+                    <a href="#" class="text-blue-400 text-xs hover:underline block mt-2">Current: Museum of Turkish &
+                        Islamic Arts</a>
                 </div>
 
                 <div class="fade-in-up delay-200 pl-8">
                     <h2 class="text-5xl font-cinzel text-white mb-6">A MONUMENT OF POWER</h2>
+
+                    <div class="mb-6 border border-gold/30 rounded-lg overflow-hidden">
+                        <img src="images/palace_sketch.jpg" class="w-full h-48 object-cover" alt="Palace Sketch">
+                    </div>
+
                     <p class="text-gray-300 text-lg mb-6 leading-relaxed">
-                        While other viziers lived in wood, Ibrahim built in stone. His palace was a fortress of luxury with four courtyards.
+                        While other viziers lived in wood, Ibrahim built in stone. His palace was a fortress of luxury
+                        with four courtyards.
                     </p>
                     <p class="text-gray-400 text-sm border-l-2 border-gold pl-4">
-                        From his enclosed balcony, he and Suleiman would watch the circumcision festivals of the princes together.
+                        From his enclosed balcony, he and Suleiman would watch the circumcision festivals of the princes
+                        together.
                     </p>
                 </div>
             </div>
@@ -412,34 +454,37 @@
 
         <!-- SLAYT 6: SEFERLER -->
         <section>
-            <img src="https://images.unsplash.com/photo-1533052402986-09d57551066c?auto=format&fit=crop&w=1920" 
-                 class="bg-img-layer" 
-                 referrerpolicy="no-referrer"
-                 alt="Campaign">
-                 
+            <img src="images/ottoman_battle.jpg" class="bg-img-layer" alt="Ottoman Campaign">
+
             <div class="overlay-full"></div>
-            
+
             <div class="content-layer z-10 text-center fade-in-up w-full px-6">
                 <p class="text-gold text-xs tracking-[0.3em] uppercase mb-4">The Sword of the Empire</p>
                 <h2 class="text-5xl md:text-7xl font-cinzel text-white mb-12">THE CAMPAIGNER</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                    <div class="bg-black/40 border border-gray-800 p-8 hover:border-gold transition duration-500 group text-left">
+                    <div
+                        class="bg-black/40 border border-gray-800 p-8 hover:border-gold transition duration-500 group text-left">
                         <span class="text-gold font-bold text-lg block mb-2">1526</span>
                         <h3 class="text-white font-cinzel text-2xl mb-4">Mohács</h3>
-                        <p class="text-gray-400 text-sm">Instrumental in the 2-hour victory that shattered the Kingdom of Hungary.</p>
-                    </div>
-                    
-                    <div class="bg-black/40 border border-gray-800 p-8 hover:border-gold transition duration-500 group text-left">
-                        <span class="text-gold font-bold text-lg block mb-2">1529</span>
-                        <h3 class="text-white font-cinzel text-2xl mb-4">Vienna</h3>
-                        <p class="text-gray-400 text-sm">Led the logistical miracle of moving the army to the gates of Vienna in winter.</p>
+                        <p class="text-gray-400 text-sm">Instrumental in the 2-hour victory that shattered the Kingdom
+                            of Hungary.</p>
                     </div>
 
-                    <div class="bg-black/40 border border-gray-800 p-8 hover:border-gold transition duration-500 group text-left">
+                    <div
+                        class="bg-black/40 border border-gray-800 p-8 hover:border-gold transition duration-500 group text-left">
+                        <span class="text-gold font-bold text-lg block mb-2">1529</span>
+                        <h3 class="text-white font-cinzel text-2xl mb-4">Vienna</h3>
+                        <p class="text-gray-400 text-sm">Led the logistical miracle of moving the army to the gates of
+                            Vienna in winter.</p>
+                    </div>
+
+                    <div
+                        class="bg-black/40 border border-gray-800 p-8 hover:border-gold transition duration-500 group text-left">
                         <span class="text-gold font-bold text-lg block mb-2">1534</span>
                         <h3 class="text-white font-cinzel text-2xl mb-4">Persia</h3>
-                        <p class="text-gray-400 text-sm">Conquered Tabriz and Baghdad. The campaign where his ambition finally went too far.</p>
+                        <p class="text-gray-400 text-sm">Conquered Tabriz and Baghdad. The campaign where his ambition
+                            finally went too far.</p>
                     </div>
                 </div>
             </div>
@@ -447,9 +492,9 @@
 
         <!-- SLAYT 7: HEYKEL KRİZİ -->
         <section>
-            <div class="overlay-base"></div>
+            <img src="images/document.png" class="bg-img-layer" style="opacity: 0.1;" alt="Background">
             <div class="overlay-dark" style="z-index: 0;"></div>
-            
+
             <div class="content-layer container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="fade-in-up order-2 md:order-1">
                     <div class="flex items-center gap-3 mb-4">
@@ -458,11 +503,13 @@
                     </div>
                     <h2 class="text-4xl md:text-5xl font-cinzel text-white mb-8">THE "IDOL" CONTROVERSY</h2>
                     <p class="text-gray-400 leading-relaxed mb-6">
-                        Following the victory at Buda, Ibrahim brought back three massive bronze statues (Hercules, Apollo, Diana) and erected them in the Hippodrome. In conservative Istanbul, these were seen as idols.
+                        Following the victory at Buda, Ibrahim brought back three massive bronze statues (Hercules,
+                        Apollo, Diana) and erected them in the Hippodrome. In conservative Istanbul, these were seen as
+                        idols.
                     </p>
-                    
+
                     <div class="bg-[#1a202c] border-l-4 border-gold p-6 mt-8 shadow-lg relative">
-                        <span class="text-6xl text-gray-700 absolute -top-4 -left-2">“</span>
+                        <span class="text-6xl text-gray-700 absolute -top-4 -left-2">"</span>
                         <p class="font-playfair italic text-white text-lg relative z-10">
                             "Into the world came two Ibrahims,<br>
                             One destroyed idols, the other set them up."
@@ -472,67 +519,69 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <div class="fade-in-up delay-200 order-1 md:order-2 flex justify-center">
-                     <div class="w-3/4 h-96 bg-gray-800 rounded-lg border border-gray-700 relative overflow-hidden shadow-2xl group">
-                        <img src="https://images.unsplash.com/photo-1544062018-da84f3c7e097?auto=format&fit=crop&w=800" 
-                             class="object-cover w-full h-full opacity-60 sepia transition group-hover:opacity-80"
-                             referrerpolicy="no-referrer"
-                             alt="Statue">
+                    <div
+                        class="w-3/4 h-96 bg-gray-800 rounded-lg border border-gray-700 relative overflow-hidden shadow-2xl group">
+                        <img src="images/idol_miniature.jpg"
+                            class="object-cover w-full h-full transition group-hover:scale-105 duration-500"
+                            alt="Ottoman Miniature - Statue">
                         <div class="absolute bottom-4 left-4">
-                            <span class="font-cinzel text-gold text-xl tracking-widest bg-black/50 px-2">BUDA STATUES</span>
+                            <span
+                                class="font-cinzel text-gold text-xl tracking-widest bg-black/70 px-4 py-2 backdrop-blur-sm">BUDA
+                                STATUES</span>
                         </div>
-                     </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- SLAYT 8: SERASKER SULTAN -->
         <section>
-            <div class="overlay-base"></div>
             <div class="overlay-dark"></div>
-            
+
             <div class="content-layer container mx-auto px-6 max-w-4xl text-center fade-in-up">
-                 <p class="text-[#a82e2e] tracking-[0.3em] uppercase mb-4 font-bold animate-pulse">The Fatal Mistake</p>
-                 <h2 class="text-5xl md:text-7xl font-cinzel text-white mb-10">
-                     "SERASKER SULTAN"
-                 </h2>
-                 
-                 <div class="bg-[#a82e2e]/10 border border-[#a82e2e]/40 p-10 rounded-lg mb-10 backdrop-blur-sm">
-                     <p class="text-2xl text-gray-300 leading-relaxed font-playfair italic">
-                         "During the Persian campaign, Ibrahim began signing decrees as 'Serasker Sultan'. A title reserved only for the Padishah."
-                     </p>
-                 </div>
-                 
-                 <p class="text-gray-400 text-lg">
-                     This act of arrogance convinced Suleiman that his brother-in-arms had become a rival to the House of Osman.
-                 </p>
+                <p class="text-[#a82e2e] tracking-[0.3em] uppercase mb-4 font-bold animate-pulse">The Fatal Mistake</p>
+                <h2 class="text-5xl md:text-7xl font-cinzel text-white mb-10">
+                    "SERASKER SULTAN"
+                </h2>
+
+                <div class="bg-[#a82e2e]/10 border border-[#a82e2e]/40 p-10 rounded-lg mb-10 backdrop-blur-sm">
+                    <p class="text-2xl text-gray-300 leading-relaxed font-playfair italic">
+                        "During the Persian campaign, Ibrahim began signing decrees as 'Serasker Sultan'. A title
+                        reserved only for the Padishah."
+                    </p>
+                </div>
+
+                <p class="text-gray-400 text-lg">
+                    This act of arrogance convinced Suleiman that his brother-in-arms had become a rival to the House of
+                    Osman.
+                </p>
             </div>
         </section>
 
         <!-- SLAYT 9: İDAM -->
         <section>
-            <img src="https://images.unsplash.com/photo-1518175854619-3304c229986b?auto=format&fit=crop&w=1920" 
-                 class="bg-img-layer" 
-                 referrerpolicy="no-referrer" 
-                 alt="Dark Room">
-                 
+            <img src="images/palace_interior.png" class="bg-img-layer" style="opacity: 0.1;" alt="Palace Interior">
+
             <div class="overlay-full" style="background: rgba(0,0,0,0.9);"></div>
 
             <div class="content-layer container mx-auto px-6 max-w-4xl text-center fade-in-up">
                 <span class="text-[#a82e2e] font-cinzel font-bold text-3xl block mb-4">1536</span>
-                
+
                 <h2 class="text-5xl md:text-7xl font-cinzel text-white mb-8">THE SILENT EXECUTION</h2>
-                
+
                 <div class="w-24 h-1 bg-[#a82e2e] mx-auto mb-10"></div>
 
                 <p class="text-xl text-gray-300 leading-relaxed mb-8">
-                    March 15. Invited to Topkapi Palace for a Ramadan dinner. He slept in the Sultan's quarters, as he had for years.
+                    March 15. Invited to Topkapi Palace for a Ramadan dinner. He slept in the Sultan's quarters, as he
+                    had for years.
                 </p>
-                
+
                 <div class="red-card p-8 inline-block text-left max-w-2xl shadow-[0_0_50px_rgba(168,46,46,0.3)]">
                     <p class="text-gray-300 text-lg">
-                        In the morning, his body was found with marks of strangulation. He was buried in an unmarked grave in Galata, denying him a state funeral.
+                        In the morning, his body was found with marks of strangulation. He was buried in an unmarked
+                        grave in Galata, denying him a state funeral.
                     </p>
                     <p class="text-gold mt-6 font-bold text-sm uppercase tracking-widest text-right">
                         The End of the Golden Age
@@ -560,7 +609,7 @@
                 if (entry.isIntersecting) {
                     const index = Array.from(sections).indexOf(entry.target);
                     dots.forEach(d => d.classList.remove('active'));
-                    if(dots[index]) dots[index].classList.add('active');
+                    if (dots[index]) dots[index].classList.add('active');
 
                     const anims = entry.target.querySelectorAll('.fade-in-up');
                     anims.forEach(el => el.classList.add('visible'));
@@ -571,4 +620,5 @@
         sections.forEach(section => observer.observe(section));
     </script>
 </body>
+
 </html>
