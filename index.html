@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Hotlink korumasını aşmak için -->
+    <meta name="referrer" content="no-referrer">
     <title>Pargalı İbrahim Pasha - The Grand Vizier</title>
     
-    <!-- Fonts: Cinzel (Başlıklar), Playfair Display (Alıntılar), Lato (Gövde) -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (Hızlı Tasarım İçin) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         :root {
-            --color-bg: #0b1121; /* Ottoman Archives Laciverti */
-            --color-gold: #eebb5d; /* Altın Sarısı */
-            --color-gold-dark: #b8860b;
-            --color-red-card: #4a0404; /* Vişne Çürüğü/Kırmızı */
-            --color-text-muted: #9ca3af;
+            --color-bg: #0b1121;
+            --color-gold: #eebb5d;
+            --color-red-card: #4a0404;
         }
 
         body {
@@ -28,13 +28,12 @@
             background-color: var(--color-bg);
             font-family: 'Lato', sans-serif;
             color: white;
-            overflow: hidden; /* Scroll-snap için */
+            overflow: hidden;
         }
 
-        /* Tipografi Ayarları */
+        /* Typography */
         .font-cinzel { font-family: 'Cinzel', serif; }
         .font-playfair { font-family: 'Playfair Display', serif; }
-        
         .text-gold { color: var(--color-gold); }
         .text-gradient-gold {
             background: linear-gradient(to bottom, #f3dba6, #eebb5d, #b8860b);
@@ -42,7 +41,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Slayt Yapısı */
+        /* Scroll Layout */
         .slides-container {
             height: 100vh;
             overflow-y: scroll;
@@ -61,22 +60,33 @@
             flex-direction: column;
             justify-content: center;
             overflow: hidden;
-            background-size: cover;
-            background-position: center;
+            background-color: #0b1121; /* Resim gelmezse arka plan rengi */
         }
 
-        /* Görsel Katmanları */
+        /* Background Image Fix - Animasyon Kaldırıldı */
+        .bg-img-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 1; /* Varsayılan olarak GÖRÜNÜR */
+        }
+
+        /* Overlays */
         .overlay-dark {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to right, #0b1121 50%, rgba(11, 17, 33, 0.7) 100%);
+            background: linear-gradient(to right, #0b1121 40%, rgba(11, 17, 33, 0.6) 100%);
             z-index: 1;
         }
         
         .overlay-full {
             position: absolute;
             inset: 0;
-            background: rgba(11, 17, 33, 0.90);
+            background: rgba(11, 17, 33, 0.85);
             z-index: 1;
         }
 
@@ -85,7 +95,7 @@
             z-index: 10;
         }
 
-        /* Özel Kart Tasarımları (Screenshots'tan alındı) */
+        /* Cards & UI */
         .red-card {
             background: linear-gradient(135deg, #4a0404 0%, #1a0505 100%);
             border: 1px solid rgba(238, 187, 93, 0.3);
@@ -107,7 +117,7 @@
             background: rgba(0,0,0,0.5);
         }
 
-        /* Navigasyon Çubuğu */
+        /* Navbar */
         .navbar {
             position: fixed;
             top: 0;
@@ -132,13 +142,11 @@
         }
         .nav-link:hover { color: var(--color-gold); }
 
-        /* Animasyonlar */
+        /* Content Animations */
         .fade-in-up { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
         .visible { opacity: 1; transform: translateY(0); }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-400 { transition-delay: 400ms; }
-
-        /* Sağ Taraf Noktaları */
+        
+        /* Navigation Dots */
         .nav-dots {
             position: fixed;
             right: 2rem;
@@ -162,7 +170,7 @@
 </head>
 <body>
 
-    <!-- Üst Menü (Ottoman Archives Stili) -->
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="flex items-center gap-3">
             <span class="text-gold text-2xl">❖</span> 
@@ -178,7 +186,7 @@
         </div>
     </nav>
 
-    <!-- Yan Menü Noktaları -->
+    <!-- Side Dots -->
     <div class="nav-dots">
         <div class="dot active" onclick="scrollToSlide(0)"></div>
         <div class="dot" onclick="scrollToSlide(1)"></div>
@@ -193,14 +201,23 @@
 
     <div class="slides-container" id="scroller">
 
-        <!-- SLAYT 1: KAPAK (The Grand Vizier) -->
-        <section style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/5b/Piri_reis_world_map_01.jpg');">
-            <div class="overlay-full" style="background: rgba(11, 17, 33, 0.85);"></div>
+        <!-- SLAYT 1: KAPAK -->
+        <section>
+            <!-- Arkaplan -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Piri_reis_world_map_01.jpg" 
+                 class="bg-img-layer" 
+                 referrerpolicy="no-referrer"
+                 alt="Piri Reis Map">
+            
+            <div class="overlay-full"></div>
             
             <div class="content-layer text-center px-6 max-w-5xl mx-auto fade-in-up">
-                <!-- Tuğra Görseli -->
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Tughra_of_Suleiman_the_Magnificent.svg/800px-Tughra_of_Suleiman_the_Magnificent.svg.png" 
-                     class="w-32 mx-auto mb-8 opacity-80 invert filter drop-shadow-[0_0_10px_rgba(238,187,93,0.5)]">
+                <!-- Tuğra (Base64) -->
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" 
+                     style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Tughra_of_Suleiman_the_Magnificent.svg/800px-Tughra_of_Suleiman_the_Magnificent.svg.png'); background-size: contain; background-repeat: no-repeat; width: 150px; height: 100px; filter: invert(1) drop-shadow(0 0 5px gold);"
+                     class="mx-auto mb-8 opacity-80 block"
+                     referrerpolicy="no-referrer"
+                     alt="Tughra">
 
                 <p class="text-xs md:text-sm tracking-[0.4em] text-gray-400 uppercase mb-4">The Grand Vizier</p>
                 
@@ -215,20 +232,29 @@
             </div>
         </section>
 
-        <!-- SLAYT 2: KÖKENLER (Makbul to Maktul) -->
-        <section style="background-image: url('https://images.unsplash.com/photo-1599423300746-b62507ac97f5?auto=format&fit=crop&q=80&w=1920');">
+        <!-- SLAYT 2: KÖKENLER (GÖRSEL DEĞİŞTİRİLDİ) -->
+        <section>
+            <!-- Yeni Görsel: Tarihi Osmanlı Kadırgası -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Turkish_galley.jpg/1280px-Turkish_galley.jpg" 
+                 class="bg-img-layer" 
+                 referrerpolicy="no-referrer"
+                 style="object-position: bottom center;" 
+                 alt="Ottoman Galley">
+            
             <div class="overlay-dark"></div>
             
             <div class="content-layer container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center h-full">
-                <!-- Sol Taraf: Metin & Portre -->
                 <div class="fade-in-up flex flex-col items-start">
                     <div class="border-t border-gold w-16 mb-6"></div>
                     <h2 class="font-cinzel text-4xl text-gold mb-2">MAKBUL TO <br> MAKTUL</h2>
                     <h3 class="font-playfair text-4xl md:text-5xl text-white mb-6">Origins in Parga</h3>
                     
                     <div class="flex gap-6 items-center">
-                        <div class="gold-border-img inline-block">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Ibrahim_Pasha.jpg" class="h-48 object-cover grayscale opacity-90">
+                        <div class="gold-border-img inline-block w-48 h-64 overflow-hidden relative bg-black">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Ibrahim_Pasha.jpg" 
+                                 class="w-full h-full object-cover grayscale opacity-90"
+                                 referrerpolicy="no-referrer"
+                                 alt="Ibrahim Pasha">
                         </div>
                         <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
                             Born <strong>Theophilus</strong> (1493). Son of a sailor. Kidnapped by pirates, sold into slavery in Manisa, where he met Prince Suleiman.
@@ -236,23 +262,19 @@
                     </div>
                 </div>
 
-                <!-- Sağ Taraf: Zaman Çizelgesi -->
                 <div class="relative pl-8 md:pl-16 border-l border-gray-800 fade-in-up delay-200 flex flex-col justify-center">
-                    <!-- 1493 -->
                     <div class="mb-12 relative group">
                         <span class="absolute -left-[4.5rem] top-1 h-3 w-3 rounded-full border border-gold bg-transparent"></span>
                         <span class="text-[#a82e2e] font-cinzel font-bold text-lg block mb-1">1493</span>
                         <h4 class="text-white text-xl font-bold">Birth & Enslavement</h4>
                         <p class="text-gray-500 text-xs mt-1">Abducted by corsairs, brought to the Ottoman Empire.</p>
                     </div>
-                    <!-- 1520 -->
                     <div class="mb-12 relative group">
                         <span class="absolute -left-[4.5rem] top-1 h-3 w-3 rounded-full border border-gold bg-transparent"></span>
                         <span class="text-[#a82e2e] font-cinzel font-bold text-lg block mb-1">1520</span>
                         <h4 class="text-white text-xl font-bold">Hasodabaşı</h4>
                         <p class="text-gray-500 text-xs mt-1">Head of the Royal Chamber upon Suleiman's accession.</p>
                     </div>
-                    <!-- 1523 -->
                     <div class="relative group">
                         <span class="absolute -left-[4.5rem] top-1 h-4 w-4 rounded-full bg-gold shadow-[0_0_15px_#eebb5d]"></span>
                         <span class="text-gold font-cinzel font-bold text-xl block mb-1">1523</span>
@@ -263,33 +285,53 @@
             </div>
         </section>
 
-        <!-- SLAYT 3: KARDEŞLİK (The Brotherhood) -->
-        <section style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Tiziano_-_Suleiman_the_Magnificent_-_Google_Art_Project.jpg/1024px-Tiziano_-_Suleiman_the_Magnificent_-_Google_Art_Project.jpg');">
-            <div class="absolute inset-0 bg-gradient-to-l from-[#0b1121] via-[#0b1121]/95 to-transparent z-1"></div>
+        <!-- SLAYT 3: KARDEŞLİK (BROTHERHOOD) -->
+        <section>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c6/Tiziano_-_Suleiman_the_Magnificent_-_Google_Art_Project.jpg" 
+                 class="bg-img-layer" 
+                 referrerpolicy="no-referrer"
+                 style="object-position: top center;"
+                 alt="Suleiman">
             
-            <div class="content-layer container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center text-right md:text-left h-full">
-                <div class="hidden md:block"></div> <!-- Boşluk -->
+            <div class="absolute inset-0 bg-black/60 z-1"></div>
+            
+            <div class="content-layer container mx-auto px-6 h-full flex items-center justify-center">
                 
-                <div class="fade-in-up md:pl-12">
-                    <p class="text-xs tracking-widest text-gold uppercase mb-2">The Sultan & The Slave</p>
-                    <h2 class="text-5xl font-cinzel text-white mb-8">THE BROTHERHOOD</h2>
+                <div class="bg-[#0b1121]/80 backdrop-blur-md p-10 md:p-14 border border-gold/30 rounded-xl shadow-[0_0_60px_rgba(0,0,0,0.8)] max-w-4xl w-full text-center fade-in-up relative overflow-hidden">
                     
-                    <div class="bg-black/60 p-8 border-l-4 border-gold">
-                        <p class="text-xl text-gray-200 italic font-playfair mb-4 leading-relaxed">
-                            "They ate together, hunted together, and shared the same tent. There was no secret between the Sultan and his Vizier."
+                    <div class="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-gold opacity-50"></div>
+                    <div class="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-gold opacity-50"></div>
+                    <div class="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-gold opacity-50"></div>
+                    <div class="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-gold opacity-50"></div>
+
+                    <p class="text-xs tracking-[0.5em] text-gold uppercase mb-4">The Sultan & The Slave</p>
+                    <h2 class="text-5xl md:text-7xl font-cinzel text-white mb-8">THE BROTHERHOOD</h2>
+                    
+                    <div class="relative py-6 px-4 md:px-12">
+                        <span class="text-6xl text-gold/20 font-playfair absolute top-0 left-0">“</span>
+                        <p class="text-2xl md:text-3xl text-gray-100 italic font-playfair leading-relaxed">
+                            They ate together, hunted together, and shared the same tent. There was no secret between the Sultan and his Vizier.
                         </p>
-                        <p class="text-gold text-xs uppercase tracking-widest text-right">— Venetian Ambassador</p>
+                        <span class="text-6xl text-gold/20 font-playfair absolute bottom-0 right-0">”</span>
                     </div>
                     
-                    <p class="text-gray-400 mt-6 leading-relaxed text-sm">
-                        This intimacy was Ibrahim's greatest strength and his ultimate weakness. It created jealousy in the court and fear in the dynasty.
+                    <div class="w-24 h-px bg-gold/50 mx-auto my-8"></div>
+                    
+                    <p class="text-gray-300 text-lg leading-relaxed font-light px-4 md:px-8">
+                        This intimacy was Ibrahim's greatest strength and his ultimate weakness. It created an inseparable bond that ruled the world, but also bred the jealousy that would eventually destroy him.
                     </p>
                 </div>
+
             </div>
         </section>
 
-        <!-- SLAYT 4: DÜĞÜN (Kırmızı Kart) -->
-        <section style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Surname-i_H%C3%BCmayun_-_circumcision_feast_2.jpg/600px-Surname-i_H%C3%BCmayun_-_circumcision_feast_2.jpg');">
+        <!-- SLAYT 4: DÜĞÜN -->
+        <section>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Surname-i_H%C3%BCmayun_-_circumcision_feast_2.jpg" 
+                 class="bg-img-layer" 
+                 referrerpolicy="no-referrer"
+                 alt="Wedding">
+                 
             <div class="overlay-full" style="background: rgba(11, 17, 33, 0.94);"></div>
 
             <div class="content-layer container mx-auto px-6 flex items-center justify-center">
@@ -323,12 +365,16 @@
             </div>
         </section>
 
-        <!-- SLAYT 5: SARAY & HARİTA (Popup Stili) -->
-        <section style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Topkapi_Palace_Harem_02.jpg/1024px-Topkapi_Palace_Harem_02.jpg');">
+        <!-- SLAYT 5: SARAY & HARİTA -->
+        <section>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Topkapi_Palace_Harem_02.jpg" 
+                 class="bg-img-layer" 
+                 referrerpolicy="no-referrer"
+                 alt="Palace">
+                 
             <div class="overlay-dark"></div>
             
             <div class="content-layer container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <!-- Popup Kart (Ekran görüntüsündeki gibi) -->
                 <div class="map-popup p-6 fade-in-up bg-[#1e293b] relative">
                     <div class="absolute -top-3 -left-3 bg-gold text-black font-bold px-3 py-1 text-xs">MAP VIEW</div>
                     
@@ -339,8 +385,11 @@
                         </div>
                     </div>
                     <div class="bg-black/50 h-32 w-full mb-4 rounded border border-gray-600 overflow-hidden relative">
-                         <!-- Harita Temsili -->
-                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Map_of_Constantinople_%281422%29_by_Cristoforo_Buondelmonti.jpg/600px-Map_of_Constantinople_%281422%29_by_Cristoforo_Buondelmonti.jpg" class="w-full h-full object-cover opacity-60">
+                         <!-- Harita -->
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Map_of_Constantinople_%281422%29_by_Cristoforo_Buondelmonti.jpg" 
+                              class="w-full h-full object-cover opacity-60"
+                              referrerpolicy="no-referrer"
+                              alt="Old Map">
                          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gold text-2xl">📍</div>
                     </div>
                     <p class="text-gray-300 text-sm mb-2">
@@ -361,8 +410,13 @@
             </div>
         </section>
 
-        <!-- SLAYT 6: SEFERLER (Kartlı Yapı) -->
-        <section style="background-image: url('https://images.unsplash.com/photo-1545183490-25e243916295?auto=format&fit=crop&q=80&w=1920');">
+        <!-- SLAYT 6: SEFERLER -->
+        <section>
+            <img src="https://images.unsplash.com/photo-1533052402986-09d57551066c?auto=format&fit=crop&w=1920" 
+                 class="bg-img-layer" 
+                 referrerpolicy="no-referrer"
+                 alt="Campaign">
+                 
             <div class="overlay-full"></div>
             
             <div class="content-layer z-10 text-center fade-in-up w-full px-6">
@@ -370,21 +424,18 @@
                 <h2 class="text-5xl md:text-7xl font-cinzel text-white mb-12">THE CAMPAIGNER</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                    <!-- Mohacs -->
                     <div class="bg-black/40 border border-gray-800 p-8 hover:border-gold transition duration-500 group text-left">
                         <span class="text-gold font-bold text-lg block mb-2">1526</span>
                         <h3 class="text-white font-cinzel text-2xl mb-4">Mohács</h3>
                         <p class="text-gray-400 text-sm">Instrumental in the 2-hour victory that shattered the Kingdom of Hungary.</p>
                     </div>
                     
-                    <!-- Vienna -->
                     <div class="bg-black/40 border border-gray-800 p-8 hover:border-gold transition duration-500 group text-left">
                         <span class="text-gold font-bold text-lg block mb-2">1529</span>
                         <h3 class="text-white font-cinzel text-2xl mb-4">Vienna</h3>
                         <p class="text-gray-400 text-sm">Led the logistical miracle of moving the army to the gates of Vienna in winter.</p>
                     </div>
 
-                    <!-- Persia -->
                     <div class="bg-black/40 border border-gray-800 p-8 hover:border-gold transition duration-500 group text-left">
                         <span class="text-gold font-bold text-lg block mb-2">1534</span>
                         <h3 class="text-white font-cinzel text-2xl mb-4">Persia</h3>
@@ -394,9 +445,12 @@
             </div>
         </section>
 
-        <!-- SLAYT 7: HEYKEL KRİZİ (Figani Şiiri) -->
-        <section class="bg-[#0b1121]">
-             <div class="content-layer container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <!-- SLAYT 7: HEYKEL KRİZİ -->
+        <section>
+            <div class="overlay-base"></div>
+            <div class="overlay-dark" style="z-index: 0;"></div>
+            
+            <div class="content-layer container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="fade-in-up order-2 md:order-1">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="text-gold text-2xl">🎭</span>
@@ -407,7 +461,6 @@
                         Following the victory at Buda, Ibrahim brought back three massive bronze statues (Hercules, Apollo, Diana) and erected them in the Hippodrome. In conservative Istanbul, these were seen as idols.
                     </p>
                     
-                    <!-- Figani Şiiri Kutusu -->
                     <div class="bg-[#1a202c] border-l-4 border-gold p-6 mt-8 shadow-lg relative">
                         <span class="text-6xl text-gray-700 absolute -top-4 -left-2">“</span>
                         <p class="font-playfair italic text-white text-lg relative z-10">
@@ -422,7 +475,10 @@
                 
                 <div class="fade-in-up delay-200 order-1 md:order-2 flex justify-center">
                      <div class="w-3/4 h-96 bg-gray-800 rounded-lg border border-gray-700 relative overflow-hidden shadow-2xl group">
-                        <img src="https://images.unsplash.com/photo-1596306499300-0b7b1689b9e6?auto=format&fit=crop&q=80&w=800" class="object-cover w-full h-full opacity-60 sepia transition group-hover:opacity-80">
+                        <img src="https://images.unsplash.com/photo-1544062018-da84f3c7e097?auto=format&fit=crop&w=800" 
+                             class="object-cover w-full h-full opacity-60 sepia transition group-hover:opacity-80"
+                             referrerpolicy="no-referrer"
+                             alt="Statue">
                         <div class="absolute bottom-4 left-4">
                             <span class="font-cinzel text-gold text-xl tracking-widest bg-black/50 px-2">BUDA STATUES</span>
                         </div>
@@ -431,8 +487,11 @@
             </div>
         </section>
 
-        <!-- SLAYT 8: SERASKER SULTAN (Kırılma) -->
-        <section class="bg-[#0b1121]">
+        <!-- SLAYT 8: SERASKER SULTAN -->
+        <section>
+            <div class="overlay-base"></div>
+            <div class="overlay-dark"></div>
+            
             <div class="content-layer container mx-auto px-6 max-w-4xl text-center fade-in-up">
                  <p class="text-[#a82e2e] tracking-[0.3em] uppercase mb-4 font-bold animate-pulse">The Fatal Mistake</p>
                  <h2 class="text-5xl md:text-7xl font-cinzel text-white mb-10">
@@ -451,8 +510,13 @@
             </div>
         </section>
 
-        <!-- SLAYT 9: İDAM (Son) -->
-        <section style="background-image: url('https://images.unsplash.com/photo-1518175854619-3304c229986b?auto=format&fit=crop&q=80&w=1920');">
+        <!-- SLAYT 9: İDAM -->
+        <section>
+            <img src="https://images.unsplash.com/photo-1518175854619-3304c229986b?auto=format&fit=crop&w=1920" 
+                 class="bg-img-layer" 
+                 referrerpolicy="no-referrer" 
+                 alt="Dark Room">
+                 
             <div class="overlay-full" style="background: rgba(0,0,0,0.9);"></div>
 
             <div class="content-layer container mx-auto px-6 max-w-4xl text-center fade-in-up">
